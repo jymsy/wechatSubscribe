@@ -1,0 +1,19 @@
+{
+  "name": "ibmessager",
+  "version": "0.0.1",
+  "description": "ibmessager",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^1.4.2",
+    "body-parser": "^1.13.3",
+    "crypto": "^0.0.3",
+    "express": "^4.13.3",
+    "formidable": "^1.0.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
