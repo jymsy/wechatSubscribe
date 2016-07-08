@@ -2,6 +2,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var apiRouterV1 = require('./api_router_v1');
+var define = require('./define');
 // require('./Models');
 var app = express();
 
@@ -17,6 +18,6 @@ app.use(function (err, req, res, next) {
 
     var http = require("http");
 
-    http.createServer(app).listen(8181, 'localhost');
+    http.createServer(app).listen(define.port, define.host);
 
 console.log("Server has started.");
