@@ -7,8 +7,6 @@ exports.getAccessToken = function(callback) {
     url = url.replace("APPID", define.appId);
     url = url.replace("APPSECRET", define.appSecret);
 
-    console.log(url);
-
     https.get(url, function(res){
         console.log('statusCode: ', res.statusCode);
         var resData = [];
