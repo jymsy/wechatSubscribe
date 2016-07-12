@@ -9,7 +9,8 @@
     "crypto": "^0.0.3",
     "express": "^4.13.3",
     "formidable": "^1.0.17",
-    "lodash": "^4.13.1"
+    "lodash": "^4.13.1",
+    "wechat-api": "^1.28.0"
   },
   "devDependencies": {},
   "scripts": {
