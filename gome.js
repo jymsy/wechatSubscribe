@@ -29,11 +29,14 @@ var checkGome = function() {
           (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
           var timeOpen = new Date(value.timeOpen);
           var date = timeOpen.getHours() + ':' + timeOpen.getMinutes() + ':' + timeOpen.getSeconds();
-          console.log(value.title + ' ' + date);
-          var api = new WechatAPI(config.appId, config.appSecret);
-          api.sendTemplate(config.testUid, config.templateId, '', getData(value.title, date), function(err, result) {
-              console.log(result);
-          });
+          var now = (new Date()).valueOf();
+          if (value.timeOpen - 300000 < now && now < value.timeOpen + 300000) {
+            console.log(value.title + ' ' + date);
+            var api = new WechatAPI(config.appId, config.appSecret);
+            api.sendTemplate(config.testUid, config.templateId, '', getData(value.title, date), function(err, result) {
+                console.log(result);
+            });
+          }
         }
       });
     });
