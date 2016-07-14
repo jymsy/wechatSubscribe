@@ -17,13 +17,19 @@ var getData = function(name, time) {
 };
 
 var checkGome = function() {
-    https.get(url, function(res) {
+  https.get(url, function(res) {
     var results = '';
     res.on('data', function(chunk) {
       results += chunk;
     });
     res.on('end', function() {
-      var loans = JSON.parse(results);
+      var loans;
+      try {
+        loans = JSON.parse(results);
+      } catch (e) {
+        return;
+      }
+
       _.forIn(loans.results, function(value) {
         if (value.rate == 550 &&
           (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
@@ -34,7 +40,7 @@ var checkGome = function() {
             console.log(value.title + ' ' + date);
             var api = new WechatAPI(config.appId, config.appSecret);
             api.sendTemplate(config.testUid, config.templateId, '', getData(value.title, date), function(err, result) {
-                console.log(result);
+              console.log(result);
             });
           }
         }
@@ -48,5 +54,3 @@ var checkGome = function() {
 checkGome();
 
 setInterval(checkGome, 60000);
-
-
