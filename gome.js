@@ -16,6 +16,14 @@ var getData = function(name, time) {
   };
 };
 
+var parseJson = function(str) {
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    return;
+  }
+};
+
 var checkGome = function() {
   https.get(url, function(res) {
     var results = '';
@@ -23,28 +31,25 @@ var checkGome = function() {
       results += chunk;
     });
     res.on('end', function() {
-      var loans;
-      try {
-        loans = JSON.parse(results);
-      } catch (e) {
-        return;
-      }
-
-      _.forIn(loans.results, function(value) {
-        if (value.rate == 550 &&
-          (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
-          var timeOpen = new Date(value.timeOpen);
-          var date = timeOpen.getHours() + ':' + timeOpen.getMinutes() + ':' + timeOpen.getSeconds();
-          var now = (new Date()).valueOf();
-          if (value.timeOpen - 300000 < now && now < value.timeOpen + 300000) {
-            console.log(value.title + ' ' + date);
-            var api = new WechatAPI(config.appId, config.appSecret);
-            api.sendTemplate(config.testUid, config.templateId, '', getData(value.title, date), function(err, result) {
-              console.log(result);
-            });
+      var loans = parseJson(results);
+      if (loans) {
+        console.log(loans);
+        _.forIn(loans.results, function(value) {
+          if (value.rate == 550 &&
+            (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
+            var timeOpen = new Date(value.timeOpen);
+            var date = timeOpen.getHours() + ':' + timeOpen.getMinutes() + ':' + timeOpen.getSeconds();
+            var now = (new Date()).valueOf();
+            if (value.timeOpen - 300000 < now && now < value.timeOpen + 300000) {
+              console.log(value.title + ' ' + date);
+              var api = new WechatAPI(config.appId, config.appSecret);
+              api.sendTemplate(config.testUid, config.templateId, '', getData(value.title, date), function(err, result) {
+                console.log(result);
+              });
+            }
           }
-        }
-      });
+        });
+      }
     });
   }).on('error', function(e) {
     console.error(e);
