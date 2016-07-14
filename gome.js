@@ -33,7 +33,6 @@ var checkGome = function() {
     res.on('end', function() {
       var loans = parseJson(results);
       if (loans) {
-        console.log(loans);
         _.forIn(loans.results, function(value) {
           if (value.rate == 550 &&
             (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
