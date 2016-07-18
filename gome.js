@@ -39,7 +39,7 @@ var checkGome = function() {
             var timeOpen = new Date(value.timeOpen);
             var date = timeOpen.getHours() + ':' + timeOpen.getMinutes() + ':' + timeOpen.getSeconds();
             var now = (new Date()).valueOf();
-            if (value.timeOpen - 120000 < now && now < value.timeOpen + 120000) {
+            if (value.timeOpen - 120000 < now && now < value.timeOpen + 1) {
               console.log(value.title + ' ' + date);
               var api = new WechatAPI(config.appId, config.appSecret);
               api.sendTemplate(config.testUid, config.templateId, '', getData(value.title, date), function(err, result) {
