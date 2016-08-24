@@ -24,6 +24,15 @@ var parseJson = function(str) {
   }
 };
 
+var isValidLoan = function(value) {
+  if ((value.rate == 550 || value.rate == 580) &&
+    (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 var checkGome = function() {
   https.get(url, function(res) {
     var results = '';
@@ -34,8 +43,7 @@ var checkGome = function() {
       var loans = parseJson(results);
       if (loans) {
         _.forIn(loans.results, function(value) {
-          if (value.rate == 550 &&
-            (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
+          if (isValidLoan(value)) {
             var timeOpen = new Date(value.timeOpen);
             var date = timeOpen.getHours() + ':' + timeOpen.getMinutes() + ':' + timeOpen.getSeconds();
             var now = (new Date()).valueOf();
