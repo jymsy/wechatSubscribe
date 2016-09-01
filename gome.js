@@ -25,13 +25,15 @@ var parseJson = function(str) {
 };
 
 var isValidLoan = function(value) {
-  if ((value.rate == 550 || value.rate == 580) &&
+  if ((value.rate >= 550 && value.rate <= 580) &&
     (value.status == 'SCHEDULED' || value.status == 'OPENED')) {
     return true;
   } else {
     return false;
   }
 };
+
+var api = new WechatAPI(config.appId, config.appSecret);
 
 var checkGome = function() {
   https.get(url, function(res) {
@@ -49,7 +51,7 @@ var checkGome = function() {
             var now = (new Date()).valueOf();
             if (value.timeOpen - 120000 < now && now < value.timeOpen + 1) {
               console.log(value.title + ' ' + date);
-              var api = new WechatAPI(config.appId, config.appSecret);
+              // var api = new WechatAPI(config.appId, config.appSecret);
               api.sendTemplate(config.testUid, config.templateId, '', getData(value.title, date), function(err, result) {
                 console.log(result);
               });
@@ -59,9 +61,11 @@ var checkGome = function() {
       }
     });
   }).on('error', function(e) {
+    var now = (new Date()).valueOf();
+    console.log('time:' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
     console.error(e);
   });
-}
+};
 
 checkGome();
 
