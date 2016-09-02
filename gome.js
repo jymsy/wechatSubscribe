@@ -61,7 +61,7 @@ var checkGome = function() {
       }
     });
   }).on('error', function(e) {
-    var now = (new Date()).valueOf();
+    var now = new Date();
     console.log('time:' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds());
     console.error(e);
   });
