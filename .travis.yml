@@ -1,7 +1,16 @@
 language: node_js
 node_js:
-  - "8"
+- '8'
 script: true
 cache:
   directories:
-    - "node_modules"
+  - "node_modules"
+before_install:
+- openssl aes-256-cbc -K $encrypted_21895f630ce0_key -iv $encrypted_21895f630ce0_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+after_success:
+  - ssh root@192.144.141.118 'cd /root/wechatSubscribe && git pull'
+  - ssh root@192.144.141.118 'cd /root/wechatSubscribe && npm install'
+addons:
+  ssh_known_hosts: 192.144.141.118
