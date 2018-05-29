@@ -1,4 +1,4 @@
-var token = "jymsynb"
+var token = "jymsynb";
 
 var crypto = require('crypto');
 

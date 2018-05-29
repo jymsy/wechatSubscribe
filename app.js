@@ -1,4 +1,3 @@
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var apiRouterV1 = require('./api_router_v1');
@@ -16,8 +15,7 @@ app.use(function (err, req, res, next) {
     return res.status(500).json({"error_message":err});
 });
 
-    var http = require("http");
-
-    http.createServer(app).listen(define.port, define.host);
+var http = require("http");
+http.createServer(app).listen(define.port, define.host);
 
 console.log("Server has started.");

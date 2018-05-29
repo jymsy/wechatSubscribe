@@ -2,7 +2,7 @@
   "name": "ibmessager",
   "version": "0.0.1",
   "description": "ibmessager",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "async": "^1.4.2",
     "body-parser": "^1.13.3",
