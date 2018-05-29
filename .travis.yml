@@ -10,7 +10,7 @@ before_install:
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
 after_success:
-  - ssh root@$ip 'cd /root/wechatSubscribe && git pull'
-  - ssh root@$ip 'cd /root/wechatSubscribe && npm install'
+  - ssh root@192.144.141.118 'cd /root/wechatSubscribe && git pull'
+  - ssh root@192.144.141.118 'cd /root/wechatSubscribe && npm install'
 addons:
-  ssh_known_hosts: $ip
+  ssh_known_hosts: 192.144.141.118
