@@ -1,6 +1,6 @@
 var https = require('https');
 var _ = require('lodash');
-var config = require('./define');
+var config = require('./config/define');
 var WechatAPI = require('wechat-api');
 
 var url = 'https://www.gomemyc.com/api/v2/loans/getLoanWithPage?&pageSize=6&status=SCHEDULED&minDuration=0&maxDuration=3&minRate=0&maxRate=100&currentPage=1&product=';

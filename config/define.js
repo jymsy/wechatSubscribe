@@ -1,7 +1,7 @@
 
 
 module.exports = {
-    port: 8181,
+    port: 80,
     host: '0.0.0.0',
     appId: 'wxa9a67cd8b04081ae123',
     appSecret: '3d20db4745cf0836b995a5c311371055312',

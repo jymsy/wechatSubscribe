@@ -1,5 +1,5 @@
 
-var define = require('../define');
+var define = require('../config/define');
 var https = require('https');
 
 exports.getAccessToken = function(callback) {

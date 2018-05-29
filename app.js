@@ -1,8 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var apiRouterV1 = require('./api_router_v1');
-var define = require('./define');
-// require('./Models');
+var define = require('./config/define');
 var app = express();
 
 app.use(bodyParser.json({limit: '1mb'}));
